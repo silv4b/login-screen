@@ -18,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void clearEmail() {
     setState(() {
       _controllerEmail.text = "";
+      //_controllerEmail.clear();
     });
   }
 
@@ -57,7 +58,10 @@ class _LoginScreenState extends State<LoginScreen> {
               suffixIcon: IconButton(
                 //onPressed: () => _controllerEmail.clear(),
                 //onPressed: () => _controllerEmail.text = "",
-                onPressed: clearEmail,
+                //onPressed: clearEmail,
+                onPressed: () {
+                  WidgetsBinding.instance.addPostFrameCallback((_) => _controllerEmail.clear());
+                },
                 icon: Icon(Icons.clear, color: Colors.white),
               ),
             ),
@@ -97,7 +101,10 @@ class _LoginScreenState extends State<LoginScreen> {
               suffixIcon: IconButton(
                 //onPressed: () => _controllerPass.clear(),
                 //onPressed: () => _controllerPass.text = "",
-                onPressed: clearPass,
+                //onPressed: clearPass,
+                onPressed: () {
+                  WidgetsBinding.instance.addPostFrameCallback((_) => _controllerPass.clear());
+                },
                 icon: Icon(Icons.clear, color: Colors.white),
               ),
             ),
