@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Icons.email,
                 color: Colors.white,
               ),
-              hintText: 'Enter your Email',
+              hintText: 'Digite seu Email',
               hintStyle: kHintTextStyle,
               suffixIcon: IconButton(
                 //onPressed: () => _controllerEmail.clear(),
@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Icons.lock,
                 color: Colors.white,
               ),
-              hintText: 'Enter your Password',
+              hintText: 'Digite sua senha',
               hintStyle: kHintTextStyle,
               suffixIcon: IconButton(
                 //onPressed: () => _controllerPass.clear(),
@@ -218,16 +218,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  //! LABEL DE COLOCAR EMAIL
+                  // LABEL DE COLOCAR EMAIL
                   SizedBox(height: 20.0),
                   _labelEmail(),
-                  //! LABEL DE COLOCAR EMAIL
+                  // LABEL DE COLOCAR EMAIL
                   SizedBox(height: 25.0),
                   _labelSenha(),
-                  //! TEXTO DE ESQUECEU SENHA
+                  // TEXTO DE ESQUECEU SENHA
                   SizedBox(height: 30.0),
                   _textoEsqueceuSenha(),
-                  //! CAIXINHA DE MARCAR 'LEMBRA DE MIM'
+                  // CAIXINHA DE MARCAR 'LEMBRA DE MIM'
                   _caixaDeSelecaoLembrarLembrar(),
                   _botaoLogin(),
                 ],
