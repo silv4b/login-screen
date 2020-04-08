@@ -10,7 +10,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _lembraDeMim = false;
+  bool _lembraDeMim = true;
 
   //função que cria o widget de email
   Widget _labelEmail() {
@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   //Caixa de selecao p 'lembrar de mim?'
-  Widget _caixaDeSelecao() {
+  Widget _caixaDeSelecaoLembrarLembrar() {
     return Container(
       child: Row(
         children: <Widget>[
@@ -114,10 +114,34 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           Text(
-            'Lembra de mim?',
+            'Lembrar de mim?',
             style: kLabelStyle,
           ),
         ],
+      ),
+    );
+  }
+
+  //botão de login
+  Widget _botaoLogin() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 10.0),
+      width: double.infinity,
+      child: RaisedButton(
+        elevation: 3.0,
+        onPressed: () => print('Botão de login pressionado'),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        color: Colors.white,
+        child: Text(
+          'LOGIN',
+          style: TextStyle(
+              color: Color(0xFF527DAA),
+              letterSpacing: 2.5,
+              fontFamily: 'OpenSans',
+              fontSize: 18.0),
+        ),
       ),
     );
   }
@@ -174,7 +198,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 30.0),
                   _textoEsqueceuSenha(),
                   //! CAIXINHA DE MARCAR 'LEMBRA DE MIM'
-                  _caixaDeSelecao(),
+                  _caixaDeSelecaoLembrarLembrar(),
+                  _botaoLogin(),
                 ],
               ),
             ),
