@@ -12,6 +12,21 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool _lembraDeMim = true;
 
+  var _controllerEmail = TextEditingController();
+  var _controllerPass = TextEditingController();
+
+  void clearEmail() {
+    setState(() {
+      _controllerEmail.text = "";
+    });
+  }
+
+  void clearPass() {
+    setState(() {
+      _controllerPass.text = "";
+    });
+  }
+
   //função que cria o widget de email
   Widget _labelEmail() {
     return Column(
@@ -27,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: kBoxDecorationStyle,
           height: 35.0,
           child: TextField(
+            controller: _controllerEmail,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
@@ -38,6 +54,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               hintText: 'Enter your Email',
               hintStyle: kHintTextStyle,
+              suffixIcon: IconButton(
+                //onPressed: () => _controllerEmail.clear(),
+                //onPressed: () => _controllerEmail.text = "",
+                onPressed: clearEmail,
+                icon: Icon(Icons.clear, color: Colors.white),
+              ),
             ),
           ),
         ),
@@ -60,6 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: kBoxDecorationStyle,
           height: 35.0,
           child: TextField(
+            controller: _controllerPass,
             obscureText: true,
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
@@ -71,6 +94,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               hintText: 'Enter your Password',
               hintStyle: kHintTextStyle,
+              suffixIcon: IconButton(
+                //onPressed: () => _controllerPass.clear(),
+                //onPressed: () => _controllerPass.text = "",
+                onPressed: clearPass,
+                icon: Icon(Icons.clear, color: Colors.white),
+              ),
             ),
           ),
         ),
@@ -137,10 +166,11 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Text(
           'LOGIN',
           style: TextStyle(
-              color: Color(0xFF527DAA),
-              letterSpacing: 2.5,
-              fontFamily: 'OpenSans',
-              fontSize: 18.0),
+            color: Color(0xFF527DAA),
+            letterSpacing: 2.5,
+            fontFamily: 'OpenSans',
+            fontSize: 18.0,
+          ),
         ),
       ),
     );
