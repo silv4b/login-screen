@@ -1,5 +1,3 @@
-//import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:login_page/utilities/constants.dart';
@@ -15,6 +13,7 @@ class _LoginScreenState extends State<LoginScreen> {
   var _controllerEmail = TextEditingController();
   var _controllerPass = TextEditingController();
 
+  // pissibilidade de uso (causa Exception)
   void clearEmail() {
     setState(() {
       _controllerEmail.text = "";
@@ -22,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
+  // pissibilidade de uso (causa Exception)
   void clearPass() {
     setState(() {
       _controllerPass.text = "";
@@ -56,11 +56,8 @@ class _LoginScreenState extends State<LoginScreen> {
               hintText: 'Digite seu Email',
               hintStyle: kHintTextStyle,
               suffixIcon: IconButton(
-                //onPressed: () => _controllerEmail.clear(),
-                //onPressed: () => _controllerEmail.text = "",
-                //onPressed: clearEmail,
                 onPressed: () {
-                  WidgetsBinding.instance.addPostFrameCallback((_) => _controllerEmail.clear());
+                  WidgetsBinding.instance.addPostFrameCallback((_) => _controllerEmail.clear()); // correção do Exception caused by gesture!
                 },
                 icon: Icon(Icons.clear, color: Colors.white),
               ),
@@ -99,9 +96,6 @@ class _LoginScreenState extends State<LoginScreen> {
               hintText: 'Digite sua senha',
               hintStyle: kHintTextStyle,
               suffixIcon: IconButton(
-                //onPressed: () => _controllerPass.clear(),
-                //onPressed: () => _controllerPass.text = "",
-                //onPressed: clearPass,
                 onPressed: () {
                   WidgetsBinding.instance.addPostFrameCallback((_) => _controllerPass.clear());
                 },
