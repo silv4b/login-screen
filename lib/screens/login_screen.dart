@@ -39,14 +39,15 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   // verifoca o estado dos campos de texto (email e senha), se estão vazios ou não
-  bool validateField() {
-    if (_controllerEmail.text.isNotEmpty || _controllerPass.text.isNotEmpty) {
+  bool validateFields() {
+    if (_controllerEmail.text.isNotEmpty && _controllerPass.text.isNotEmpty){
       clearBoth();
-      return true; // se email ou senha vazio
+      return true;
     }
     return false;
   }
 
+  // exibe alerta caso a condição de validateField() seja verdadeira (true)
   void _exibirDialogo() {
     showDialog(
       context: context,
@@ -56,12 +57,35 @@ class _LoginScreenState extends State<LoginScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30.0),
           ),
-          title: new Text("Alerta"),
-          content: new Text("Campos de senha ou email vazios!"),
+          title: Text(
+            "Alerta",
+            style: TextStyle(
+              color: Color(0xFF527DAA),
+              letterSpacing: 0.5,
+              fontFamily: 'OpenSans',
+              fontSize: 20.0,
+            ),
+          ),
+          content: Text(
+              "Campos de senha ou email estão vazios!",
+            style: TextStyle(
+              color: Color(0xFF478DE0),
+              fontFamily: 'OpenSans',
+              fontSize: 18.0,
+            ),
+          ),
           actions: <Widget>[
             // define os botões na base do dialogo
             new FlatButton(
-              child: new Text("Ok"),
+              child: Text(
+                  "OK ",
+                style: TextStyle(
+                  color: Color(0xFF527DAA),
+                  letterSpacing: 0.5,
+                  fontFamily: 'OpenSans',
+                  fontSize: 15.0,
+                ),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -174,6 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
   //Caixa de selecao p 'lembrar de mim?'
   Widget _caixaDeSelecaoLembrarLembrar() {
     return Container(
+      alignment: Alignment.centerLeft,
       child: Row(
         children: <Widget>[
           Theme(
@@ -207,16 +232,14 @@ class _LoginScreenState extends State<LoginScreen> {
       child: RaisedButton(
         elevation: 3.0,
         onPressed: () {
-          //clearEmail();
-          //clearPass();
-          // responsável por linkar e navegar entre as paginas
-          if (validateField() == true) {
+          if (validateFields() == true) {
+            // responsável por linkar e navegar entre as paginas
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => HomeScreen()),
             );
-          } else if (validateField() == false) {
-            print("Não é possivel avançar");
+          } else {
+            // exive um popup de alerta para caso o Navigator não execute
             _exibirDialogo();
           }
         },

@@ -14,7 +14,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Segunda Rota'),
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Color(0xFF73AEF5),
+
       ),
       body: Stack(
         children: <Widget>[
