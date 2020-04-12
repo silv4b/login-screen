@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:login_page/utilities/constants.dart';
+import 'package:login_page/screens/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -16,8 +17,8 @@ class _LoginScreenState extends State<LoginScreen> {
   // pissibilidade de uso (causa Exception)
   void clearEmail() {
     setState(() {
-      _controllerEmail.text = "";
-      //_controllerEmail.clear();
+      _controllerEmail.clear();
+      // or _controllerEmail.text = "";
     });
   }
 
@@ -25,6 +26,14 @@ class _LoginScreenState extends State<LoginScreen> {
   void clearPass() {
     setState(() {
       _controllerPass.text = "";
+      // or _controllerPass.clear();
+    });
+  }
+
+  void clearBoth() {
+    setState(() {
+      _controllerEmail.clear();
+      _controllerPass..clear();
     });
   }
 
@@ -57,7 +66,9 @@ class _LoginScreenState extends State<LoginScreen> {
               hintStyle: kHintTextStyle,
               suffixIcon: IconButton(
                 onPressed: () {
-                  WidgetsBinding.instance.addPostFrameCallback((_) => _controllerEmail.clear()); // correção do Exception caused by gesture!
+                  WidgetsBinding.instance.addPostFrameCallback((_) =>
+                      _controllerEmail
+                          .clear()); // correção do Exception caused by gesture!
                 },
                 icon: Icon(Icons.clear, color: Colors.white),
               ),
@@ -97,7 +108,8 @@ class _LoginScreenState extends State<LoginScreen> {
               hintStyle: kHintTextStyle,
               suffixIcon: IconButton(
                 onPressed: () {
-                  WidgetsBinding.instance.addPostFrameCallback((_) => _controllerPass.clear());
+                  WidgetsBinding.instance
+                      .addPostFrameCallback((_) => _controllerPass.clear());
                 },
                 icon: Icon(Icons.clear, color: Colors.white),
               ),
@@ -159,7 +171,15 @@ class _LoginScreenState extends State<LoginScreen> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 3.0,
-        onPressed: () => print('Botão de login pressionado'),
+        onPressed: () {
+          clearEmail();
+          clearPass();
+          // responsável por lindar
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+          );
+        },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
