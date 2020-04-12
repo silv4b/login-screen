@@ -30,11 +30,46 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
+  // limpa ambos os campos
   void clearBoth() {
     setState(() {
       _controllerEmail.clear();
-      _controllerPass..clear();
+      _controllerPass.clear();
     });
+  }
+
+  // verifoca o estado dos campos de texto (email e senha), se estão vazios ou não
+  bool validateField() {
+    if (_controllerEmail.text.isNotEmpty || _controllerPass.text.isNotEmpty) {
+      clearBoth();
+      return true; // se email ou senha vazio
+    }
+    return false;
+  }
+
+  void _exibirDialogo() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // retorna um objeto do tipo Dialog
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          title: new Text("Alerta"),
+          content: new Text("Campos de senha ou email vazios!"),
+          actions: <Widget>[
+            // define os botões na base do dialogo
+            new FlatButton(
+              child: new Text("Ok"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   //função que cria o widget de email
@@ -172,13 +207,18 @@ class _LoginScreenState extends State<LoginScreen> {
       child: RaisedButton(
         elevation: 3.0,
         onPressed: () {
-          clearEmail();
-          clearPass();
-          // responsável por lindar
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-          );
+          //clearEmail();
+          //clearPass();
+          // responsável por linkar e navegar entre as paginas
+          if (validateField() == true) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+            );
+          } else if (validateField() == false) {
+            print("Não é possivel avançar");
+            _exibirDialogo();
+          }
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
