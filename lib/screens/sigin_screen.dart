@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-//import 'package:login_page/screens/login_screen.dart';
-//import 'package:flutter/services.dart';
-//import 'package:login_page/utilities/constants.dart';
 
-class HomeScreen extends StatefulWidget {
+class SigInScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _SigInScreenState createState() => _SigInScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _SigInScreenState extends State<SigInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Screen'),
+        title: Text('SigIn Screen'),
         backgroundColor: Color(0xFF73AEF5),
       ),
       body: Stack(

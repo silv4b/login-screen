@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:login_page/utilities/constants.dart';
 import 'package:login_page/screens/home_screen.dart';
+import 'package:login_page/screens/sigin_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -40,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // verifoca o estado dos campos de texto (email e senha), se estão vazios ou não
   bool validateFields() {
-    if (_controllerEmail.text.isNotEmpty && _controllerPass.text.isNotEmpty){
+    if (_controllerEmail.text.isNotEmpty && _controllerPass.text.isNotEmpty) {
       clearBoth();
       return true;
     }
@@ -67,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           content: Text(
-              "Campos de senha ou email estão vazios!",
+            "Campos de senha ou email estão vazios!",
             style: TextStyle(
               color: Color(0xFF478DE0),
               fontFamily: 'OpenSans',
@@ -78,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
             // define os botões na base do dialogo
             new FlatButton(
               child: Text(
-                  "OK ",
+                "OK ",
                 style: TextStyle(
                   color: Color(0xFF527DAA),
                   letterSpacing: 0.5,
@@ -199,6 +200,19 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _caixaDeSelecaoLembrarLembrar() {
     return Container(
       alignment: Alignment.centerLeft,
+      child: FlatButton(
+        onPressed: () => print('Botão de lembrar a senha!'),
+        padding: EdgeInsets.only(right: 0.0),
+        child: Text(
+          'Lembra de mim?',
+          //style: TextStyle(color: Colors.white),
+          style: kLabelStyle,
+        ),
+      ),
+    );
+    /*
+    return Container(
+      alignment: Alignment.centerLeft,
       child: Row(
         children: <Widget>[
           Theme(
@@ -220,6 +234,28 @@ class _LoginScreenState extends State<LoginScreen> {
             style: kLabelStyle,
           ),
         ],
+      ),
+    );
+    */
+  }
+
+  Widget _textoJaCadastradoP() {
+    return Container(
+      alignment: Alignment.centerRight,
+      child: FlatButton(
+        onPressed: () {
+          print(' Botão Cadastre-se!');
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SigInScreen()),
+          );
+        },
+        padding: EdgeInsets.only(right: 0.0),
+        child: Text(
+          'Cadastre-se!',
+          //style: TextStyle(color: Colors.white),
+          style: kLabelStyle,
+        ),
       ),
     );
   }
@@ -314,6 +350,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   // CAIXINHA DE MARCAR 'LEMBRA DE MIM'
                   _caixaDeSelecaoLembrarLembrar(),
                   _botaoLogin(),
+                  SizedBox(height: 0.0),
+                  _textoJaCadastradoP(),
                 ],
               ),
             ),
