@@ -10,7 +10,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _lembraDeMim = true;
+  bool _lembraDeMim = false;
 
   var _controllerEmail = TextEditingController();
   var _controllerPass = TextEditingController();
@@ -200,19 +200,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _caixaDeSelecaoLembrarLembrar() {
     return Container(
       alignment: Alignment.centerLeft,
-      child: FlatButton(
-        onPressed: () => print('Botão de lembrar a senha!'),
-        padding: EdgeInsets.only(right: 0.0),
-        child: Text(
-          'Lembra de mim?',
-          //style: TextStyle(color: Colors.white),
-          style: kLabelStyle,
-        ),
-      ),
-    );
-    /*
-    return Container(
-      alignment: Alignment.centerLeft,
       child: Row(
         children: <Widget>[
           Theme(
@@ -236,7 +223,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
-    */
   }
 
   Widget _textoJaCadastradoP() {

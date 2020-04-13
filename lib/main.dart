@@ -3,7 +3,7 @@ import 'package:login_page/screens/login_screen.dart';
 
 //void main() => runApp(MyApp());
 
-// maneira de iniciar o aplicativo como forma de rotas
+// maneira alternativa de iniciar o aplicativo
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,

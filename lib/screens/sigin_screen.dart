@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:login_page/utilities/constants.dart';
-//import 'package:login_page/screens/home_screen.dart';
-//import 'package:login_page/screens/sigin_screen.dart';
 
 class SigInScreen extends StatefulWidget {
   @override
@@ -10,27 +8,22 @@ class SigInScreen extends StatefulWidget {
 }
 
 class _SigInScreenState extends State<SigInScreen> {
-  bool _lembraDeMim = true;
-
   var _controllerEmail = TextEditingController();
   var _controllerPass = TextEditingController();
   var _controllerNome = TextEditingController();
   var _controllerSobrenome = TextEditingController();
 
-  // pissibilidade de uso (causa Exception)
-  void clearEmail() {
-    setState(() {
-      _controllerEmail.clear();
-    });
+  bool validateFields() {
+    if (_controllerEmail.text.isEmpty ||
+        _controllerPass.text.isNotEmpty ||
+        _controllerNome.text.isEmpty ||
+        _controllerSobrenome.text.isEmpty) {
+      return false;
+    }
+    clearBoth();
+    return false;
   }
 
-  void clearPass() {
-    setState(() {
-      _controllerPass.clear();
-    });
-  }
-
-  // limpa todos os campos
   void clearBoth() {
     setState(() {
       _controllerNome.clear();
@@ -40,21 +33,10 @@ class _SigInScreenState extends State<SigInScreen> {
     });
   }
 
-  // verifoca o estado dos campos de texto (email e senha), se estão vazios ou não
-  bool validateFields() {
-    if (_controllerEmail.text.isNotEmpty && _controllerPass.text.isNotEmpty) {
-      clearBoth();
-      return true;
-    }
-    return false;
-  }
-
-  // exibe alerta caso a condição de validateField() seja verdadeira (true)
   void _exibirDialogo() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        // retorna um objeto do tipo Dialog
         return AlertDialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30.0),
@@ -69,7 +51,7 @@ class _SigInScreenState extends State<SigInScreen> {
             ),
           ),
           content: Text(
-            "Campos de senha ou email estão vazios!",
+            "Nenhum campo pode estar vazio!",
             style: TextStyle(
               color: Color(0xFF478DE0),
               fontFamily: 'OpenSans',
@@ -77,7 +59,6 @@ class _SigInScreenState extends State<SigInScreen> {
             ),
           ),
           actions: <Widget>[
-            // define os botões na base do dialogo
             new FlatButton(
               child: Text(
                 "OK ",
@@ -126,9 +107,8 @@ class _SigInScreenState extends State<SigInScreen> {
               hintStyle: kHintTextStyle,
               suffixIcon: IconButton(
                 onPressed: () {
-                  WidgetsBinding.instance.addPostFrameCallback((_) =>
-                      _controllerEmail
-                          .clear()); // correção do Exception caused by gesture!
+                  WidgetsBinding.instance
+                      .addPostFrameCallback((_) => _controllerEmail.clear());
                 },
                 icon: Icon(Icons.clear, color: Colors.white),
               ),
@@ -167,9 +147,8 @@ class _SigInScreenState extends State<SigInScreen> {
               hintStyle: kHintTextStyle,
               suffixIcon: IconButton(
                 onPressed: () {
-                  WidgetsBinding.instance.addPostFrameCallback((_) =>
-                      _controllerEmail
-                          .clear()); // correção do Exception caused by gesture!
+                  WidgetsBinding.instance
+                      .addPostFrameCallback((_) => _controllerEmail.clear());
                 },
                 icon: Icon(Icons.clear, color: Colors.white),
               ),
@@ -208,9 +187,8 @@ class _SigInScreenState extends State<SigInScreen> {
               hintStyle: kHintTextStyle,
               suffixIcon: IconButton(
                 onPressed: () {
-                  WidgetsBinding.instance.addPostFrameCallback((_) =>
-                      _controllerEmail
-                          .clear()); // correção do Exception caused by gesture!
+                  WidgetsBinding.instance
+                      .addPostFrameCallback((_) => _controllerEmail.clear());
                 },
                 icon: Icon(Icons.clear, color: Colors.white),
               ),
@@ -221,7 +199,6 @@ class _SigInScreenState extends State<SigInScreen> {
     );
   }
 
-  //função que cria o widget de senha
   Widget _labelSenha() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -271,7 +248,6 @@ class _SigInScreenState extends State<SigInScreen> {
         onPressed: () {
           if (validateFields() == true) {
           } else {
-            // exive um popup de alerta para caso o Navigator não execute
             _exibirDialogo();
           }
         },
@@ -295,6 +271,10 @@ class _SigInScreenState extends State<SigInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Home Screen'),
+        backgroundColor: Color(0xFF73AEF5),
+      ),
       body: Stack(
         children: <Widget>[
           Container(
@@ -320,13 +300,13 @@ class _SigInScreenState extends State<SigInScreen> {
               physics: AlwaysScrollableScrollPhysics(),
               padding: EdgeInsets.symmetric(
                 horizontal: 40.0,
-                vertical: 120.0,
+                vertical: 60.0,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Sign In Screen',
+                    'SigIn Screen',
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'Opensans',
@@ -334,7 +314,6 @@ class _SigInScreenState extends State<SigInScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  // LABEL DE COLOCAR EMAIL
                   SizedBox(height: 20.0),
                   _labelNome(),
                   SizedBox(height: 20.0),
